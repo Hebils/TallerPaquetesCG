@@ -23,4 +23,9 @@ public class PaqueteDato
     public string Id { get => id; set => id = value; }
     public int TamanoCarga { get => tamanoCarga; set => tamanoCarga = value; }
     public float TiempoLlegada { get => tiempoLlegada; set => tiempoLlegada = value; }
+
+    public override string ToString()
+    {
+        return $"PaqueteDato [id={id}, tamanoCarga={tamanoCarga}, tiempoLlegada={tiempoLlegada}]";
+    }
 }
