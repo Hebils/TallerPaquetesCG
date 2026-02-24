@@ -1,8 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Text textoCola;
+    public Text textoProcesados;
+    public Text textoPromedio;
+
+    public Button botonProcesar;
+
     void Start()
     {
         

@@ -16,6 +16,10 @@ public class ServidorManager : MonoBehaviour
 
     Guid nuevoGuid = Guid.NewGuid();
 
+    public int totalProcesados = 0;
+    public float tiempoEsperaAcumulado = 0f;
+    public float promedioEspera = 0f;
+
     void Start()
     {
         StartCoroutine(TiempoEspera());
@@ -73,6 +77,24 @@ public class ServidorManager : MonoBehaviour
             }
             yield return new WaitForSeconds(1f);
         }
+    }
+
+
+    public void ProcesarSiguiente()
+    {
+        if (colaProcesamiento.Count == 0) return;
+
+        PaqueteDato paquete = colaProcesamiento.Dequeue();
+
+        if (historialProcesados.ContainsKey(paquete.Id)) return;
+
+        historialProcesados.Add(paquete.Id, paquete);
+
+        float tiempoEspera = Time.time - paquete.TiempoLlegada;
+
+        totalProcesados++;
+        tiempoEsperaAcumulado += tiempoEspera;
+        promedioEspera = tiempoEsperaAcumulado / totalProcesados;
     }
 
 }
