@@ -16,9 +16,9 @@ public class ServidorManager : MonoBehaviour
 
     Guid nuevoGuid = Guid.NewGuid();
 
-    public int totalProcesados = 0;
-    public float tiempoEsperaAcumulado = 0f;
-    public float promedioEspera = 0f;
+    private int totalProcesados;
+    private float tiempoEsperaAcumulado;
+    private float promedioEspera;
 
     void Start()
     {
@@ -35,37 +35,36 @@ public class ServidorManager : MonoBehaviour
         string nuevoGuidString = Guid.NewGuid().ToString();
         string nombrePaquete = nuevoGuidString;
         int tamanoCarga = Random.Range(1, 7);
-        float tiempoProcesamiento = Random.Range(0.5f, 3f);
+        float tiempoProcesamiento = Time.time;
+
         PaqueteDato paqueteDato = new PaqueteDato(nombrePaquete, tamanoCarga, tiempoProcesamiento);
         Debug.Log($"Creado {paqueteDato.Id} con un peso de {paqueteDato.TamanoCarga} KB y tiempo de procesamiento de {paqueteDato.TiempoLlegada} segundos.");
+
+        if (paqueteDato == null) return;
+        colaProcesamiento.Enqueue(paqueteDato);
+        Debug.Log($"Agregado {paqueteDato.Id} a la cola de procesamiento.");
 
     }
 
     IEnumerator TiempoEspera()
-    { 
+    {
 
         while (true)
         {
 
-            float tiempoEspera = Random.Range(2f,4f);
+            float tiempoEspera = Random.Range(2f, 4f);
             int generadorPaquete = Random.Range(1, 6);
-            
+
 
             if (generadorPaquete == 1)
             {
                 Debug.Log($"Tiempo de espera {tiempoEspera} para generar {generadorPaquete} paquete");
-            }else
+            }
+            else
             {
                 Debug.Log($" Tiempo de espera {tiempoEspera} para generar {generadorPaquete} paquetes");
             }
             yield return new WaitForSeconds(tiempoEspera);
-
-            CrearPaquete();
-            //foreach (int  i in generadorPaquete)
-            //{
-
-
-            //}
 
             if (generadorPaquete == 1)
             {
@@ -75,26 +74,39 @@ public class ServidorManager : MonoBehaviour
             {
                 Debug.Log($" Tiempo de espera {tiempoEspera} ha terminado, generando {generadorPaquete} paquetes");
             }
+            for (int i = 0; i < generadorPaquete; i++)
+            {
+                CrearPaquete();
+
+                yield return new WaitForSeconds(Random.Range(0.5f, 1f));
+            }
+
+            yield return new WaitForSeconds(1f);
+
+            ProcesarSiguiente();
+
+            Debug.Log($"{historialProcesados.Count} paquetes en la cola de procesamiento.");
             yield return new WaitForSeconds(1f);
         }
     }
-
 
     public void ProcesarSiguiente()
     {
         if (colaProcesamiento.Count == 0) return;
 
-        PaqueteDato paquete = colaProcesamiento.Dequeue();
+        PaqueteDato paqueteDato = colaProcesamiento.Dequeue();
 
-        if (historialProcesados.ContainsKey(paquete.Id)) return;
+        if (historialProcesados.ContainsKey(paqueteDato.Id)) return;
 
-        historialProcesados.Add(paquete.Id, paquete);
+        historialProcesados.Add(paqueteDato.Id, paqueteDato);
 
-        float tiempoEspera = Time.time - paquete.TiempoLlegada;
+        float tiempoEspera = Time.time - paqueteDato.TiempoLlegada;
 
         totalProcesados++;
         tiempoEsperaAcumulado += tiempoEspera;
         promedioEspera = tiempoEsperaAcumulado / totalProcesados;
+
+        Debug.Log($"Procesado {paqueteDato.Id} con un peso de {paqueteDato.TamanoCarga} KB. Tiempo de espera: {tiempoEspera} segundos. Promedio de espera: {promedioEspera} segundos.");
     }
 
 }
