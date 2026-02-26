@@ -109,4 +109,11 @@ public class ServidorManager : MonoBehaviour
         Debug.Log($"Procesado {paqueteDato.Id} con un peso de {paqueteDato.TamanoCarga} KB. Tiempo de espera: {tiempoEspera} segundos. Promedio de espera: {promedioEspera} segundos.");
     }
 
+    public PaqueteDato BuscarPorID(string id)
+    {
+        if (historialProcesados.ContainsKey(id))
+            return historialProcesados[id];
+
+        return null;
+    }
 }
