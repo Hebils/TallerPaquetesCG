@@ -8,11 +8,11 @@ using Random = UnityEngine.Random;
 public class ServidorManager : MonoBehaviour
 {
 
-    List<PaqueteDato> paqueteDato = new List<PaqueteDato>();
+    public List<PaqueteDato> paqueteDato = new List<PaqueteDato>();
 
-    Dictionary<string, PaqueteDato> historialProcesados = new Dictionary<string, PaqueteDato>();
+    public Dictionary<string, PaqueteDato> historialProcesados = new Dictionary<string, PaqueteDato>();
 
-    Queue<PaqueteDato> colaProcesamiento = new Queue<PaqueteDato>();
+    public Queue<PaqueteDato> colaProcesamiento = new Queue<PaqueteDato>();
 
     Guid nuevoGuid = Guid.NewGuid();
 
