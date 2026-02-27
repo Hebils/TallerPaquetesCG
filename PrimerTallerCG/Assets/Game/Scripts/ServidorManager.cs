@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using TMPro;
 
 public class ServidorManager : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class ServidorManager : MonoBehaviour
 
     private int totalProcesados;
     private float tiempoEsperaAcumulado;
-    private float promedioEspera;
+    public float promedioEspera;
+
+    public TMP_InputField inputBuscarId;
 
     void Start()
     {
@@ -83,7 +86,6 @@ public class ServidorManager : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
-            ProcesarSiguiente();
 
             Debug.Log($"{historialProcesados.Count} paquetes en la cola de procesamiento.");
             yield return new WaitForSeconds(1f);
@@ -109,11 +111,22 @@ public class ServidorManager : MonoBehaviour
         Debug.Log($"Procesado {paqueteDato.Id} con un peso de {paqueteDato.TamanoCarga} KB. Tiempo de espera: {tiempoEspera} segundos. Promedio de espera: {promedioEspera} segundos.");
     }
 
-    public PaqueteDato BuscarPorID(string id)
+    public void BuscarPorID(string id)
     {
-        if (historialProcesados.ContainsKey(id))
-            return historialProcesados[id];
 
-        return null;
+        id = inputBuscarId.text;
+
+        if (historialProcesados.ContainsKey(id))
+        {
+
+            Debug.Log($"Paquete encontrado: ID: {historialProcesados[id].Id}, Tamaño: {historialProcesados[id].TamanoCarga} KB, Tiempo de llegada: {historialProcesados[id].TiempoLlegada} s");
+            return;
+
+        }
+        else
+        {
+            Debug.Log("Paquete no encontrado");
+            return;
+        }
     }
 }
