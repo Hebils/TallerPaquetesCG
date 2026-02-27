@@ -1,28 +1,32 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 
 {
-    public ServidorManager Servidor;
+    public ServidorManager servidor;
+
+    public GameObject imagenSaturacion;
 
 
-    public Text textoCola;
-    public Text textoHistorialProcesados;
-    public Text textoUltimoProcesado;
-    public Text textoPromedio;
-    public Text textoEstadoServidor;
+    public TextMeshProUGUI textoId;
+    public TextMeshProUGUI textoTamano;
+    public TextMeshProUGUI textoTiempoLlegada;
 
-    public Button botonProcesar;
-    public Button botonBuscarId;
+    public TextMeshProUGUI textoIdBuscar;
+    public TextMeshProUGUI textoTamanoBuscar;
+    public TextMeshProUGUI textoTiempoLlegadaBuscar;
 
-    public InputField inputBuscarId;
-    public Text textoResultadoBusqueda;
+    public TextMeshProUGUI textoCola;
+    public TextMeshProUGUI textoHistorialProcesados;
+    public TextMeshProUGUI textoPromedio;
+    public TextMeshProUGUI textoEstadoServidor;
+
+    public TMP_InputField inputBuscarId;
 
     void Start()
     {
-        //botonProcesar.onClick.AddListener(ProcesarSiguiente);
-        botonBuscarId.onClick.AddListener(BuscarPorId);
     }
 
     // Update is called once per frame
@@ -32,59 +36,73 @@ public class UIManager : MonoBehaviour
     }
 
     void ActualizarUI()
-    {  
+    {
         // 1️ Cantidad en cola
-        textoCola.text = "Paquetes en cola: " + Servidor.colaProcesamiento.Count;
+        textoCola.text = "Paquetes en cola: " + servidor.colaProcesamiento.Count;
 
         // 2️ Total procesados (Dictionary)
         textoHistorialProcesados.text =
-            "Total procesados: " + Servidor.historialProcesados.Count;
+            "Total procesados: " + servidor.historialProcesados.Count;
 
         // 3️ Promedio de espera
-        //textoPromedio.text =
-            //"Promedio espera: " +
-            //Servidor.promedioEspera().ToString("F2") + " s";
-        
-        
+        textoPromedio.text =
+        "Promedio espera: " +
+        servidor.promedioEspera.ToString("F2") + " s";
+
+
         // 4️ Estado del servidor
-        if (Servidor.colaProcesamiento.Count > 20)
+        if (servidor.colaProcesamiento.Count > 20)
         {
             textoEstadoServidor.text = "SERVIDOR SATURADO";
-            
+            imagenSaturacion.SetActive(true);
+
         }
         else
         {
             textoEstadoServidor.text = "Servidor operando normal";
-            
+            imagenSaturacion.SetActive(false);
         }
+
+        if (servidor.historialProcesados.Count > 0)
+        {
+            PaqueteDato ultimoProcesado = null;
+            foreach (PaqueteDato paquete in servidor.historialProcesados.Values)
+            {
+                ultimoProcesado = paquete;
+            }
+
+            if (ultimoProcesado != null)
+            {
+                textoId.text = "ID: " + ultimoProcesado.Id;
+                textoTamano.text = "Tamaño: " + ultimoProcesado.TamanoCarga + " KB";
+                textoTiempoLlegada.text = "Tiempo llegada: " + ultimoProcesado.TiempoLlegada.ToString("F2") + " s";
+            }
+        }
+
     }
 
 
 
 
-    void BuscarPorId()
+    public void BuscarPorId()
     {
         string id = inputBuscarId.text;
 
-        if (string.IsNullOrEmpty(id))
-        {
-            textoResultadoBusqueda.text = "Ingrese un ID válido.";
-            return;
-        }
+        PaqueteDato paquete = servidor.BuscarPorID(id);
 
-        PaqueteDato paquete = Servidor.BuscarPorID(id);
-
-        if (paquete != null)
+        if (servidor.historialProcesados.ContainsKey(id) != false)
         {
-            textoResultadoBusqueda.text =
-                "Paquete encontrado\n" +
-                "Tamaño: " + paquete.TamanoCarga + " KB\n" +
-                "Tiempo llegada: " + paquete.TiempoLlegada.ToString("F2");
+            textoIdBuscar.text = "ID: " + paquete.Id;
+            textoTamanoBuscar.text = "Tamaño: " + paquete.TamanoCarga + " KB";
+            textoTiempoLlegadaBuscar.text = "Tiempo llegada: " + paquete.TiempoLlegada.ToString("F2") + " s";
         }
         else
         {
-            textoResultadoBusqueda.text =
-                "No existe un paquete con ese ID.";
+            textoIdBuscar.text = "ID: No encontrado";
+            textoTamanoBuscar.text = "Tamaño: N/A";
+            textoTiempoLlegadaBuscar.text = "Tiempo llegada: N/A";
+
+
         }
     }
 }
