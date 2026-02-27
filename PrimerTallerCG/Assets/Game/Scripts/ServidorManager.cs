@@ -54,7 +54,7 @@ public class ServidorManager : MonoBehaviour
         while (true)
         {
 
-            if (colaProcesamiento.Count < 20)
+            if (colaProcesamiento.Count <= 20)
             {
 
                 float tiempoEspera = Random.Range(2f, 4f);
@@ -85,8 +85,6 @@ public class ServidorManager : MonoBehaviour
 
                     yield return new WaitForSeconds(Random.Range(0.5f, 1f));
                 }
-
-                yield return new WaitForSeconds(1f);
 
             }
             else
