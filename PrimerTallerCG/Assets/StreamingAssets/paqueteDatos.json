@@ -1,54 +1,24 @@
 {
     "paquetes": [
         {
-            "id": "16042bf3-037f-49b4-b641-2fdd586f88d9",
+            "id": "5d46acbc-6ab1-461a-9482-87b626a339a1",
             "tamanoCarga": 4,
-            "tiempoLlegada": 3.1641716957092287
+            "tiempoLlegada": 2.275221347808838
         },
         {
-            "id": "fa6a647a-4568-4154-9df7-456bca13ca0f",
+            "id": "8d99c034-b022-40fd-93bb-b93739fe5e22",
             "tamanoCarga": 4,
-            "tiempoLlegada": 4.018533706665039
+            "tiempoLlegada": 3.260312080383301
         },
         {
-            "id": "d923b4bc-c30d-490a-a538-518bbaaf8011",
-            "tamanoCarga": 6,
-            "tiempoLlegada": 4.590712070465088
+            "id": "2dfcc1f7-5bfb-4786-8b7d-7e323a1ed409",
+            "tamanoCarga": 3,
+            "tiempoLlegada": 3.839338779449463
         },
         {
-            "id": "23f6a97f-841f-42a0-b97d-dfb55ebf8d2e",
+            "id": "03ea07c1-a3a2-4ac0-9866-5b841645581f",
             "tamanoCarga": 2,
-            "tiempoLlegada": 5.3685688972473148
-        },
-        {
-            "id": "fa573436-98ad-43cd-b5fd-f64a72e199bc",
-            "tamanoCarga": 3,
-            "tiempoLlegada": 9.7228364944458
-        },
-        {
-            "id": "e44fcc99-7f1a-4af2-8035-0b85e1d1658c",
-            "tamanoCarga": 1,
-            "tiempoLlegada": 10.56276798248291
-        },
-        {
-            "id": "a1c789a6-0682-4a9a-a72a-6820be8342a8",
-            "tamanoCarga": 1,
-            "tiempoLlegada": 11.167299270629883
-        },
-        {
-            "id": "4a1178fb-a9b3-4f51-b59b-7958db318a94",
-            "tamanoCarga": 6,
-            "tiempoLlegada": 16.774642944335939
-        },
-        {
-            "id": "876673f9-5489-415e-a6ab-42b4e2d41921",
-            "tamanoCarga": 3,
-            "tiempoLlegada": 17.478294372558595
-        },
-        {
-            "id": "2c8eb751-6903-4116-b383-2b129ebd7df9",
-            "tamanoCarga": 3,
-            "tiempoLlegada": 18.37574005126953
+            "tiempoLlegada": 4.710604190826416
         }
     ]
 }

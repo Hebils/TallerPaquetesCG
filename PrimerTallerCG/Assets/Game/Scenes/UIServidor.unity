@@ -527,8 +527,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 370.07935, y: -43}
-  m_SizeDelta: {x: 723.1656, y: 50}
+  m_AnchoredPosition: {x: 409.94, y: -59}
+  m_SizeDelta: {x: 802.87, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &257076995
 MonoBehaviour:
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 10.760628, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.64707184, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1153,8 +1153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 370.07935, y: -43}
-  m_SizeDelta: {x: 723.1656, y: 50}
+  m_AnchoredPosition: {x: 414.36243, y: -61.9}
+  m_SizeDelta: {x: 811.7304, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &557464852
 MonoBehaviour:
@@ -1242,7 +1242,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 10.760628, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.76136017, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1642,8 +1642,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0043945, y: -0.00059891}
-  m_SizeDelta: {x: 1982.8, y: 1045.8}
+  m_AnchoredPosition: {x: 0.00097466, y: -0.0001049}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &844656440
 MonoBehaviour:
@@ -2848,7 +2848,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae3b11a529117e479d3b3356318e18f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ServidorManager
-  paqueteDato: []
   promedioEspera: 0
   inputBuscarId: {fileID: 1973353851}
 --- !u!4 &1812615946
