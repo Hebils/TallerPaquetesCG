@@ -21,7 +21,8 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        
+        //botonProcesar.onClick.AddListener(ProcesarSiguiente);
+        botonBuscarId.onClick.AddListener(BuscarPorId);
     }
 
     // Update is called once per frame
@@ -40,9 +41,11 @@ public class UIManager : MonoBehaviour
             "Total procesados: " + Servidor.historialProcesados.Count;
 
         // 3️ Promedio de espera
-        textoPromedio.text =
-            "Promedio espera: " +
-            Servidor.ObtenerPromedioEspera().ToString("F2") + " s";
+        //textoPromedio.text =
+            //"Promedio espera: " +
+            //Servidor.promedioEspera().ToString("F2") + " s";
+        
+        
         // 4️ Estado del servidor
         if (Servidor.colaProcesamiento.Count > 20)
         {
@@ -53,6 +56,35 @@ public class UIManager : MonoBehaviour
         {
             textoEstadoServidor.text = "Servidor operando normal";
             
+        }
+    }
+
+
+
+
+    void BuscarPorId()
+    {
+        string id = inputBuscarId.text;
+
+        if (string.IsNullOrEmpty(id))
+        {
+            textoResultadoBusqueda.text = "Ingrese un ID válido.";
+            return;
+        }
+
+        PaqueteDato paquete = Servidor.BuscarPorID(id);
+
+        if (paquete != null)
+        {
+            textoResultadoBusqueda.text =
+                "Paquete encontrado\n" +
+                "Tamaño: " + paquete.TamanoCarga + " KB\n" +
+                "Tiempo llegada: " + paquete.TiempoLlegada.ToString("F2");
+        }
+        else
+        {
+            textoResultadoBusqueda.text =
+                "No existe un paquete con ese ID.";
         }
     }
 }
