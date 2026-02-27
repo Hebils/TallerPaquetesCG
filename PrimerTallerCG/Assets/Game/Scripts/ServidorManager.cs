@@ -86,8 +86,6 @@ public class ServidorManager : MonoBehaviour
                     yield return new WaitForSeconds(Random.Range(0.5f, 1f));
                 }
 
-                yield return new WaitForSeconds(1f);
-
             }
             else
             {
