@@ -12,6 +12,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI textoTamano;
     public TextMeshProUGUI textoTiempoLlegada;
 
+    public TextMeshProUGUI textoIdBuscar;
+    public TextMeshProUGUI textoTamanoBuscar;
+    public TextMeshProUGUI textoTiempoLlegadaBuscar;
+
     public TextMeshProUGUI textoCola;
     public TextMeshProUGUI textoHistorialProcesados;
     public TextMeshProUGUI textoPromedio;
@@ -56,6 +60,7 @@ public class UIManager : MonoBehaviour
 
         }
 
+
         // PaqueteDato paquete = servidor.BuscarPorID(servidor.inputBuscarId.text);
         // if (paquete != null)
         // {
@@ -74,29 +79,25 @@ public class UIManager : MonoBehaviour
 
 
 
-    // void BuscarPorId()
-    // {
-    //     string id = inputBuscarId.text;
+    public void BuscarPorId()
+    {
+        string id = inputBuscarId.text;
 
-    //     if (string.IsNullOrEmpty(id))
-    //     {
-    //         textoResultadoBusqueda.text = "Ingrese un ID válido.";
-    //         return;
-    //     }
+        PaqueteDato paquete = servidor.BuscarPorID(id);
 
-    //     PaqueteDato paquete = Servidor.BuscarPorID(id);
+        if (servidor.historialProcesados.ContainsKey(id) != false)
+        {
+            textoIdBuscar.text = "ID: " + paquete.Id;
+            textoTamanoBuscar.text = "Tamaño: " + paquete.TamanoCarga + " KB";
+            textoTiempoLlegadaBuscar.text = "Tiempo llegada: " + paquete.TiempoLlegada.ToString("F2") + " s";
+        }
+        else
+        {
+            textoIdBuscar.text = "ID: No encontrado";
+            textoTamanoBuscar.text = "Tamaño: N/A";
+            textoTiempoLlegadaBuscar.text = "Tiempo llegada: N/A";
 
-    //     if (paquete != null)
-    //     {
-    //         textoResultadoBusqueda.text =
-    //             "Paquete encontrado\n" +
-    //             "Tamaño: " + paquete.TamanoCarga + " KB\n" +
-    //             "Tiempo llegada: " + paquete.TiempoLlegada.ToString("F2");
-    //     }
-    //     else
-    //     {
-    //         textoResultadoBusqueda.text =
-    //             "No existe un paquete con ese ID.";
-    //     }
-    // }
+
+        }
+    }
 }

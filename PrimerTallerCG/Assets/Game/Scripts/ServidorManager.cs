@@ -15,7 +15,7 @@ public class ServidorManager : MonoBehaviour
 
     public Queue<PaqueteDato> colaProcesamiento = new Queue<PaqueteDato>();
 
-    Guid nuevoGuid = Guid.NewGuid();
+    // Guid nuevoGuid = Guid.NewGuid();
 
     private int totalProcesados;
     private float tiempoEsperaAcumulado;
@@ -111,7 +111,8 @@ public class ServidorManager : MonoBehaviour
         Debug.Log($"Procesado {paqueteDato.Id} con un peso de {paqueteDato.TamanoCarga} KB. Tiempo de espera: {tiempoEspera} segundos. Promedio de espera: {promedioEspera} segundos.");
     }
 
-    public void BuscarPorID(string id)
+
+    public PaqueteDato BuscarPorID(string id)
     {
 
         id = inputBuscarId.text;
@@ -120,13 +121,12 @@ public class ServidorManager : MonoBehaviour
         {
 
             Debug.Log($"Paquete encontrado: ID: {historialProcesados[id].Id}, Tamaño: {historialProcesados[id].TamanoCarga} KB, Tiempo de llegada: {historialProcesados[id].TiempoLlegada} s");
-            return;
+            return historialProcesados[id];
 
         }
         else
         {
-            Debug.Log("Paquete no encontrado");
-            return;
+            return null;
         }
     }
 }
