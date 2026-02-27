@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public ServidorManager servidor;
 
+    public GameObject imagenSaturacion;
+
 
     public TextMeshProUGUI textoId;
     public TextMeshProUGUI textoTamano;
@@ -52,28 +54,31 @@ public class UIManager : MonoBehaviour
         if (servidor.colaProcesamiento.Count > 20)
         {
             textoEstadoServidor.text = "SERVIDOR SATURADO";
+            imagenSaturacion.SetActive(true);
 
         }
         else
         {
             textoEstadoServidor.text = "Servidor operando normal";
-
+            imagenSaturacion.SetActive(false);
         }
 
+        if (servidor.historialProcesados.Count > 0)
+        {
+            PaqueteDato ultimoProcesado = null;
+            foreach (PaqueteDato paquete in servidor.historialProcesados.Values)
+            {
+                ultimoProcesado = paquete;
+            }
 
-        // PaqueteDato paquete = servidor.BuscarPorID(servidor.inputBuscarId.text);
-        // if (paquete != null)
-        // {
-        //     textoId.text = "ID: " + paquete.Id;
-        //     textoTamano.text = "Tamaño: " + paquete.TamanoCarga + " KB";
-        //     textoTiempoLlegada.text = "Tiempo llegada: " + paquete.TiempoLlegada.ToString("F2") + " s";
-        // }
-        // else
-        // {
-        //     textoId.text = "ID: No encontrado";
-        //     textoTamano.text = "Tamaño: N/A";
-        //     textoTiempoLlegada.text = "Tiempo llegada: N/A";
-        // }
+            if (ultimoProcesado != null)
+            {
+                textoId.text = "ID: " + ultimoProcesado.Id;
+                textoTamano.text = "Tamaño: " + ultimoProcesado.TamanoCarga + " KB";
+                textoTiempoLlegada.text = "Tiempo llegada: " + ultimoProcesado.TiempoLlegada.ToString("F2") + " s";
+            }
+        }
+
     }
 
 
